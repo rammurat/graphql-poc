@@ -1,37 +1,41 @@
 import {GraphQLServer} from 'graphql-yoga'
 
 const allUsers = [{
-    id: 1,
+    id: "1",
     name: 'Ram',
     email: 'rammurat@gmail.com',
-    age: 32
+    age: "32"
 }, {
-    id: 2,
+    id: "2",
     name: 'Deepak',
     email: 'deepak@gmail.com',
-    age: 29
+    age: "29"
 }]
 
 const allPosts = [{
-    id: 11,
+    id: "11",
     title: 'Post 1',
     body: 'First post',
-    published: true
+    published: true,
+    author: "1"
 }, {
-    id: 12,
+    id: "12",
     title: 'Post 2',
     body: 'Second post',
-    published: true
+    published: true,
+    author: "2"
 },{
-    id: 13,
+    id: "13",
     title: 'Post 3',
     body: 'Third post',
-    published: false
+    published: false,
+    author: "1"
 }, {
-    id: 14,
+    id: "14",
     title: 'Post 4',
     body: 'Forth post',
-    published: false
+    published: false,
+    author: "2"
 }]
 
 // type defination
@@ -48,6 +52,7 @@ const typeDefs = `
         title: String!,
         body: String!,
         published: Boolean!
+        author: User
     }
 
     type User {
@@ -83,6 +88,13 @@ const resolvers = {
 
             return allUsers.filter((user) => {
                 return user.name.toLowerCase().includes(args.query.toLowerCase())
+            })
+        }
+    },
+    Post: {
+        author(parent, args) {
+            return allUsers.find((user) => {
+                return user.id === parent.author
             })
         }
     }

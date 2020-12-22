@@ -1,0 +1,39 @@
+// all users and posts
+{
+  allPosts{
+    id,
+    title,
+    body,
+    published
+  },
+  allUsers{
+    id,
+    name,
+    email,
+    age
+  }
+}
+
+
+// search posts and users
+{ 
+  users(query: "deep"){
+    name,
+    email
+  },
+  posts(query: "post 1"){
+    title,
+    body
+  }
+}
+
+// relational posts ans users 
+{
+  posts {
+    title,
+    author{
+      name,
+      email
+    }
+  }
+}
