@@ -14,7 +14,6 @@
   }
 }
 
-
 // search posts and users
 { 
   users(query: "deep"){
@@ -29,11 +28,16 @@
 
 // relational posts ans users 
 {
-  posts {
+  users{
+    name,
+    articles{
+      title
+    }
+  },
+  posts{
     title,
     author{
-      name,
-      email
+      name
     }
   }
 }
