@@ -41,3 +41,39 @@
     }
   }
 }
+
+// relational data between comments, users and posts 
+{
+  allComments{
+    text,
+    author{
+      name
+    }
+  },
+  users{
+    name,
+    comments{
+      text
+    }
+  }
+}
+
+// nested relational data
+{
+  posts{
+    title,
+    author {
+      name,
+      comments{
+        text
+      }
+    },
+    comments{
+      text,
+      author{
+        name
+      }
+    }
+  }
+}
+
