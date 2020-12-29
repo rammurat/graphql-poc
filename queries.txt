@@ -77,3 +77,54 @@
   }
 }
 
+// add users
+mutation {
+    createUser(data: {
+      name: "Kannu", 
+      email: "kannu@gmail.com", 
+      age: 27
+    }){
+    id,
+    name,
+    email,
+    age
+  }
+}
+
+// add posts 
+mutation {
+    createPost(data: {
+      title: "Post 101", 
+      body: "This is a new post", 
+      published: true,
+      author: "1"
+    }){
+    id,
+    title,
+    body,
+    published,
+    author {
+      name
+    }
+  }
+}
+
+// add comments 
+mutation {
+    createComment(data: {
+      text: "Comment 101", 
+      author: "1",
+      post: "11",
+    }){
+    id,
+    text,
+    author {
+      name
+    },
+    post{
+      title
+    }
+  }
+}
+
+
