@@ -127,7 +127,7 @@ mutation {
   }
 }
 
-// delete user
+// delete users
 mutation{
   deleteUser(id: "2"){
     name,
@@ -137,6 +137,27 @@ mutation{
     comments{
       text
     }
+  }
+}
+
+// delete posts
+mutation{
+  deletePost(id: "14"){
+    title,
+    comments{
+      text
+    },
+    author{
+      name
+    }
+  }
+}
+
+// delete comments
+mutation{
+  deleteComment(id: "101"){
+    text,
+    id
   }
 }
 
