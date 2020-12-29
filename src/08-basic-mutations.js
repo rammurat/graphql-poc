@@ -213,9 +213,7 @@ const resolvers = {
             // add new user and return 
             const comment = {
                 id: uuidv4(),
-                text: args.data.text,
-                author: args.data.author,
-                post: args.data.post
+                ...data.args
             }
 
             allComments.push(comment)
