@@ -127,4 +127,17 @@ mutation {
   }
 }
 
+// delete user
+mutation{
+  deleteUser(id: "2"){
+    name,
+    articles{
+      title
+    },
+    comments{
+      text
+    }
+  }
+}
+
 
