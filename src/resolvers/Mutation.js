@@ -106,6 +106,74 @@ const Mutation = {
         // remove post
         const newComments = db.allComments.splice(index, 1) 
         return newComments[0]
+    },
+    updateUser(parent, args, {db}) {
+        const user = db.allUsers.find((user) => { return user.id === args.id})
+
+        if(!user) {
+            throw new Error('User does not exist')
+        }
+
+        // update user name
+        if(typeof args.data.name === 'string') {
+            user.name = args.data.name
+        }
+
+        // update user email
+        if(typeof args.data.email === 'string') {
+            const emailTaken = db.allUsers.some((user) => { return user.email === args.data.email})
+            
+            if(emailTaken) {
+                throw new Error('Email taken')
+            }
+
+            user.email = args.data.email
+        }
+
+        // update user age
+        if(typeof args.data.age !== 'undefined') {
+            user.age = args.data.age
+        }
+
+        return user;
+    },
+    updatePost(parent, args, {db}) {
+        const post = db.allPosts.find((post) => { return post.id === args.id})
+
+        if(!post) {
+            throw new Error('Post does not exist')
+        }
+
+        // update post title
+        if(typeof args.data.title === 'string') {
+            post.title = args.data.title
+        }
+
+        // update post body
+        if(typeof args.data.body === 'string') {
+            post.body = args.data.body
+        }
+
+        // update post published state
+        if(typeof args.data.published === 'boolean') {
+            post.published = args.data.published
+        }
+
+        return post;
+    },
+    updateComment(parent, args, {db}) {
+        const comment = db.allComments.find((comment) => { return comment.id === args.id})
+
+        if(!comment) {
+            throw new Error('Comment does not exist')
+        }
+
+        // update comment text
+        if(typeof args.data.text === 'string') {
+            comment.text = args.data.text
+        }
+
+        return comment;
     }
 }
 

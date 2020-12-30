@@ -161,4 +161,34 @@ mutation{
   }
 }
 
+// update user  
+mutation {
+    updateUser( id: "1", data: {
+      name: "Ram", 
+      age: 32
+    }){
+    id,
+    name,
+    email,
+    age
+  }
+}
+
+// update post 
+updatePost( id: "11", data: {
+    title: "Post updated 1", 
+    body: "Description updated"
+  }){
+  id,
+  title,
+  body
+}
+
+// update comments
+updateComment( id: "101", data: {
+    text: "Comment updated 1"
+  }){
+  id,
+  text
+}
 
