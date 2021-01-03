@@ -36,7 +36,12 @@ const Mutation = {
         }
 
         db.allPosts.push(post)
-        pubsub.publish('post', {post})
+        pubsub.publish('post', {
+            post : {
+                mutation: 'CREATED',
+                data: post
+            }
+        })
 
         return post;
     },
@@ -85,7 +90,7 @@ const Mutation = {
 
         return newUsers[0]
     },
-    deletePost(parent, args, {db}){
+    deletePost(parent, args, {db, pubsub}){
         // remove user
         const index = db.allPosts.findIndex((post) => post.id === args.id)
         if(index === -1){
@@ -93,12 +98,19 @@ const Mutation = {
         }
 
         // remove post
-        const newPosts = db.allPosts.splice(index, 1)
+        const [post] = db.allPosts.splice(index, 1)
 
         // remove all comments related to the user
         db.allComments = db.allComments.filter((comment) => comment.post !== args.id)
 
-        return newPosts[0]
+        pubsub.publish('post', {
+            post : {
+                mutation: 'DELETED',
+                data: post
+            }
+        })
+
+        return post
     },
     deleteComment(parent, args, {db}){
         // remove user
@@ -141,7 +153,7 @@ const Mutation = {
 
         return user;
     },
-    updatePost(parent, args, {db}) {
+    updatePost(parent, args, {db, pubsub}) {
         const post = db.allPosts.find((post) => { return post.id === args.id})
 
         if(!post) {
@@ -162,6 +174,14 @@ const Mutation = {
         if(typeof args.data.published === 'boolean') {
             post.published = args.data.published
         }
+
+        // trigger subscription 
+        pubsub.publish('post', {
+            post : {
+                mutation: 'UPDATED',
+                data: post
+            }
+        })
 
         return post;
     },

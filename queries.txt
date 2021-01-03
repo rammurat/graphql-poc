@@ -175,20 +175,34 @@ mutation {
 }
 
 // update post 
-updatePost( id: "11", data: {
-    title: "Post updated 1", 
-    body: "Description updated"
-  }){
-  id,
-  title,
-  body
+mutation {
+  updatePost( id: "11", data: {
+      title: "Post updated 1", 
+      body: "Description updated"
+    }){
+    id,
+    title,
+    body
+  }
 }
 
 // update comments
-updateComment( id: "101", data: {
-    text: "Comment updated 1"
-  }){
-  id,
-  text
+mutation {
+  updateComment( id: "101", data: {
+      text: "Comment updated 1"
+    }){
+    id,
+    text
+  }
 }
 
+
+// CRUD Operations Subscription 
+subscription{
+  post{
+    mutation
+    data{
+      title
+    }
+  }
+}
