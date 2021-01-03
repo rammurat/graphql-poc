@@ -1,1 +1,1 @@
-# graphql-poc
+# graphql-yoga-poc
