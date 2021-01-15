@@ -80,8 +80,8 @@
 // add users
 mutation {
     createUser(data: {
-      name: "Kannu", 
-      email: "kannu@gmail.com", 
+      name: "Adam", 
+      email: "adam@gmail.com", 
       age: 27
     }){
     id,
